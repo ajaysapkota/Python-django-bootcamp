@@ -1,0 +1,79 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'include/head.html' %}
+
+
+<body>
+
+    <!-- Navigation -->
+    {%include 'include/navbar.html' %}
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url({% static 'img/home-bg.jpg'%})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>{{name}} Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">Python Django Blog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                {% for blog in blogs %}
+
+                    {% if blog.publish %}
+                    <div class="post-preview">
+                        <div><img src="{{blog.image.url}}" align="left" height="200px" width="200px"></div>
+
+                        <div class="col-lg-8">
+
+                        <a href="{% url 'detail' blog.pk    %}">
+                            <h2 class="post-title">
+                                {{blog.title | truncatechars:20}}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{blog.content | truncatewords:20}}
+                            </h3>
+                        </a>
+                            <p class="post-meta">Posted by <a href="#">{{  blog.author}}</a> on {{ blog.publish_date }}</p>
+                        </div>
+                         <hr>
+                    </div>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    {% include 'include/footer.html' %}
+
+    <!-- jQuery -->
+    {% include 'include/javascript.html' %}
+
+</body>
+
+</html>

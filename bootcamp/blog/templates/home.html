@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+<h1>Welcome to {{name}} blog</h1>
+
+{% for blog in blogs %}
+<a href="{% url 'detail' blog.pk %}"><h2> {{blog.title}} </h2></a>
+{{blog.content}}</br>
+<h3>{{blog.publish_date}}</h3></br>
+<h2>Author:{{blog.author}}</h2>
+
+{% endfor %}
+
+
+</body>
+</html>
